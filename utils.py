@@ -135,9 +135,9 @@ def patch_apk(
 
 
 def publish_release(tag: str, files: list[str], message: str, title = ""):
-    key = os.environ.get("GH_TOKEN")
+    key = os.environ.get("GITHUB_TOKEN")
     if key is None:
-        raise Exception("GH_TOKEN is not set")
+        raise Exception("GITHUB_TOKEN is not set")
 
     command = ["gh", "release", "create", "--latest", tag, "--notes", message, "--title", title]
 
