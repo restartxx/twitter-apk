@@ -3,7 +3,7 @@ import re
 from utils import download
 
 
-def download_release_asset(repo: str, regex: str, out_dir: str, filename=None, include_prereleases: bool = False):
+def download_release_asset(repo: str, regex: str, out_dir: str, filename=None, include_prereleases: bool = False, version = None):
     url = f"https://api.github.com/repos/{repo}/releases"
 
     response = requests.get(url)
@@ -14,6 +14,12 @@ def download_release_asset(repo: str, regex: str, out_dir: str, filename=None, i
 
     if not releases:
         raise Exception(f"No releases found for {repo}")
+
+    if version is not None:
+        releases = [r for r in releases if r["tag_name"] == version]
+
+    if len(releases) == 0:
+        raise Exception(f"No release found for version {version}")
 
     latest_release = releases[0]
 
