@@ -24,12 +24,19 @@ def build_apks(latest_version: Version):
         "Force enable translate",
     ]
 
+    common_excludes = [
+        "Enable force HD videos",
+        "Hide nudge button",
+        "Enable app icons",
+    ]
+
     patch_apk(
         cli,
         integrations,
         patches,
         apk,
         includes=common_includes,
+        excludes=common_excludes,
         out=f"x-piko-material-you-v{latest_version.version}.apk",
     )
 
@@ -39,7 +46,7 @@ def build_apks(latest_version: Version):
         patches,
         apk,
         includes=common_includes,
-        excludes=["Dynamic color"],
+        excludes=["Dynamic color"] + common_excludes,
         out=f"x-piko-v{latest_version.version}.apk",
     )
 
@@ -49,6 +56,7 @@ def build_apks(latest_version: Version):
         patches,
         apk,
         includes=["Bring back twitter"] + common_includes,
+        excludes=common_excludes,
         out=f"twitter-piko-material-you-v{latest_version.version}.apk",
     )
 
@@ -58,6 +66,6 @@ def build_apks(latest_version: Version):
         patches,
         apk,
         includes=["Bring back twitter"] + common_includes,
-        excludes=["Dynamic color"],
+        excludes=["Dynamic color"] + common_excludes,
         out=f"twitter-piko-v{latest_version.version}.apk",
     )
