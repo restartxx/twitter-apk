@@ -25,8 +25,6 @@ def build_apks(latest_version: Version):
     ]
 
     common_excludes = [
-        "Enable force HD videos",
-        "Hide nudge button",
         "Enable app icons",
     ]
 
